@@ -2,8 +2,8 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
 from urllib.parse import urlparse, parse_qs
 
-summarizer = pipeline("summarization", model="csebuetnlp/mT5_small_finetuned_summarize-news")
-
+def load_summarizer():
+    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
 
 def extract_video_id(url):
     query = urlparse(url).query
@@ -11,6 +11,8 @@ def extract_video_id(url):
     return params.get("v", [None])[0]
 
 def summarize_text(video_url):
+    summarizer = load_summarizer()
+
     video_id = extract_video_id(video_url)
     if not video_id:
         raise ValueError("Nie można znaleźć ID filmu w URL.")
