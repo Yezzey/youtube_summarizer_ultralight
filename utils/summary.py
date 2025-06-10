@@ -2,7 +2,8 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
 from urllib.parse import urlparse, parse_qs
 
-summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+summarizer = pipeline("summarization", model="csebuetnlp/mT5_small_finetuned_summarize-news")
+
 
 def extract_video_id(url):
     query = urlparse(url).query
